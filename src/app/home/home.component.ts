@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   public ngOnInit() {
     this.getStudentList();
-    if(this.studentList.length){
+    if (this.studentList.length) {
       this.getStudentSummary();
     }
   }
@@ -104,15 +104,16 @@ export class HomeComponent implements OnInit {
   }
 
   private getStudentSummary() {
-    let marks: number[] = [];
-    this.studentList.forEach(student => {
-      marks.push(student['mark']);
-    });
-    this.minMark = Math.min(...marks);
-    this.maxMark = Math.max(...marks);
-    let sum = marks.reduce((previous, current) => current += previous);
-    this.averageMark = sum / marks.length;
-
+    if (this.studentList.length) {
+      let marks: number[] = [];
+      this.studentList.forEach(student => {
+        marks.push(student['mark']);
+      });
+      this.minMark = Math.min(...marks);
+      this.maxMark = Math.max(...marks);
+      let sum = marks.reduce((previous, current) => current += previous);
+      this.averageMark = sum / marks.length;
+    }
   }
 
 }
