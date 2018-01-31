@@ -1,0 +1,30 @@
+<div>
+  <h1 x-large class="sample-content">Student List</h1>
+
+  <div class="add-new-student">
+    <h4>Add new student</h4>
+      <label>Student Name</label>
+      <input type="text" [(ngModel)]='studentName'/>
+      <label>Marks</label>
+      <input type="number" [(ngModel)]='studentMark'>
+      <button (click)="addStudent()">Add</button>
+      <div class="error" *ngIf="error">* {{error}}</div>
+  </div>
+
+  <h4 *ngIf='studentList.length'>Student List</h4>
+  <div class="student-list" *ngFor="let student of studentList;let i= index">
+    <label>Student Name</label>
+    <input type="text" [ngClass]='{"fail": student.mark < 65}' [(ngModel)]='student.name' (blur)='updateName(student)'/>
+    <label>Marks</label>
+    <input type="number" [ngClass]='{"fail": student.mark < 65}' [(ngModel)]='student.mark' (blur)='updateMark(student)'>
+    <button (click)="deleteStudent(i)">Delete</button>
+  </div>
+
+  <div *ngIf="studentList.length" class="summary-of-students">
+    <h4>Student Summary</h4>
+    <div>Mininum mark {{minMark}}</div>
+    <div>Max Mark {{maxMark}}</div>
+    <div>Class Average {{averageMark}}</div>
+  </div>
+
+</div>
